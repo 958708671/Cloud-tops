@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件上传测试</title>
+</head>
+<body>
+    <h1>文件上传测试</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <div>
+            <label for="uploaderName">上传者姓名:</label>
+            <input type="text" id="uploaderName" name="uploaderName" value="测试用户">
+        </div>
+        <div>
+            <label for="files">选择文件:</label>
+            <input type="file" id="files" name="files" multiple>
+        </div>
+        <button type="submit">上传</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                document.getElementById('result').innerHTML = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('result').innerHTML = `错误: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

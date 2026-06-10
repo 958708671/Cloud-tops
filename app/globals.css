@@ -1,0 +1,371 @@
+@import "tailwindcss";
+
+:root {
+  --background: #1a1a1a;
+  --foreground: #e0e0e0;
+  --font-pixel: 'Silkscreen', monospace;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-pixel: var(--font-pixel);
+  --color-mc-green: #5B8731;
+  --color-mc-green-light: #80B348;
+  --color-mc-green-dark: #3E6B1F;
+  --color-mc-brown: #8B6914;
+  --color-mc-brown-light: #B8942E;
+  --color-mc-dirt: #6B4C2A;
+  --color-mc-stone: #7C7C7C;
+  --color-mc-stone-dark: #4A4A4A;
+  --color-mc-stone-light: #9E9E9E;
+  --color-mc-gold: #F9B300;
+  --color-mc-red: #B3312C;
+  --color-mc-red-dark: #8B1F1A;
+}
+
+@keyframes progressBar {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  animation: progressBar 1.5s ease-in-out infinite;
+  z-index: 10;
+}
+
+/* === MC Pixel Border === */
+.border-pixel {
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,0.12),
+    inset -3px -3px 0 rgba(0,0,0,0.5);
+  border: 2px solid #4A4A4A;
+}
+
+/* === MC Pixel Button (Stone button style) === */
+.btn-mc {
+  position: relative;
+  background: #8B8B8B;
+  color: #FFFFFF;
+  border: 2px solid #000000;
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,0.35),
+    inset -3px -3px 0 rgba(0,0,0,0.45);
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
+  transition: all 0.08s ease;
+  cursor: pointer;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+.btn-mc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='rgba(255,255,255,0.08)'/%3E%3Crect x='2' y='1' width='1' height='1' fill='rgba(0,0,0,0.06)'/%3E%3Crect x='1' y='2' width='1' height='1' fill='rgba(255,255,255,0.04)'/%3E%3Crect x='3' y='3' width='1' height='1' fill='rgba(0,0,0,0.05)'/%3E%3C/svg%3E");
+  background-size: 4px 4px;
+  pointer-events: none;
+  z-index: 0;
+}
+.btn-mc > * {
+  position: relative;
+  z-index: 1;
+}
+.btn-mc:hover {
+  filter: brightness(1.12);
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,0.45),
+    inset -3px -3px 0 rgba(0,0,0,0.35);
+}
+.btn-mc:active {
+  filter: brightness(0.82);
+  box-shadow:
+    inset -3px -3px 0 rgba(255,255,255,0.1),
+    inset 3px 3px 0 rgba(0,0,0,0.5);
+  transform: translateY(1px);
+}
+
+/* === Minecraft Inventory Style Container === */
+.mc-inventory {
+  background: linear-gradient(135deg, #C8C8C8 0%, #8B8B8B 50%, #C8C8C8 100%);
+  border: 3px solid #373737;
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,0.25),
+    inset -3px -3px 0 rgba(0,0,0,0.5),
+    4px 4px 0 rgba(0,0,0,0.3);
+}
+
+/* === Block Floating Animation === */
+@keyframes blockFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.animate-block-float {
+  animation: blockFloat 2s ease-in-out infinite;
+}
+.animate-block-float-slow {
+  animation: blockFloat 3s ease-in-out infinite;
+}
+
+/* === MC Pixel Grid Background === */
+.bg-mc-grid {
+  background-image:
+    linear-gradient(rgba(91, 135, 49, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 135, 49, 0.12) 1px, transparent 1px);
+  background-size: 16px 16px;
+  background-position: center center;
+}
+
+/* === Pixel Divider === */
+.pixel-divider {
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #8B6914 0px,
+    #8B6914 4px,
+    #B8942E 4px,
+    #B8942E 8px,
+    #6B4C2A 8px,
+    #6B4C2A 12px
+  );
+}
+
+/* === Pixel Section Separator === */
+.pixel-separator {
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    #5B8731 0px,
+    #5B8731 4px,
+    #3E6B1F 4px,
+    #3E6B1F 8px
+  );
+}
+
+/* === Custom Scrollbar (MC theme) === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  border: 1px solid #4A4A4A;
+}
+::-webkit-scrollbar-thumb {
+  background: #5B8731;
+  border: 2px solid #3E6B1F;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #80B348;
+}
+
+/* === Global Body === */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  image-rendering: auto;
+}
+
+/* === Pixel Text Shadow === */
+.text-pixel-glow {
+  text-shadow:
+    2px 2px 0 rgba(0,0,0,0.6),
+    -1px -1px 0 rgba(255,255,255,0.1);
+}
+
+/* === MC Card (Inventory panel style) === */
+.mc-card {
+  background: #C6C6C6;
+  border: 2px solid #373737;
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,0.5),
+    inset -3px -3px 0 rgba(0,0,0,0.25);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.mc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px);
+  background-size: 8px 8px;
+  pointer-events: none;
+  z-index: 0;
+}
+.mc-card > * {
+  position: relative;
+  z-index: 1;
+}
+.mc-card:hover {
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,0.55),
+    inset -3px -3px 0 rgba(0,0,0,0.15),
+    0 0 8px rgba(249,179,0,0.25);
+  transform: translateY(-2px);
+}
+
+/* === MC Rare / Special Item Style (purple tooltip) === */
+.mc-rare {
+  background: rgba(40, 0, 80, 0.88);
+  border: 2px solid #2D0060;
+  box-shadow:
+    inset 3px 3px 0 rgba(120, 0, 200, 0.3),
+    inset -3px -3px 0 rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(120, 0, 200, 0.3);
+  color: #FFFFFF;
+  transition: all 0.2s ease;
+}
+.mc-rare .mc-rare-title {
+  color: #55FFFF;
+  text-shadow: 0 0 6px rgba(85, 255, 255, 0.5);
+}
+.mc-rare:hover {
+  box-shadow:
+    inset 3px 3px 0 rgba(120, 0, 200, 0.4),
+    inset -3px -3px 0 rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(120, 0, 200, 0.5);
+}
+
+/* === MC Outline Text (black border on white, like item names) === */
+.text-mc-outline {
+  color: #FFFFFF;
+  text-shadow:
+    2px 2px 0 #000000,
+    -1px -1px 0 #000000,
+    1px -1px 0 #000000,
+    -1px 1px 0 #000000,
+    1px 1px 0 #000000;
+}
+
+
+
+/* === Pixel Scroll Hint === */
+@keyframes scrollBob {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+.pixel-scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #5B8731;
+  font-family: var(--font-pixel), monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  cursor: default;
+  user-select: none;
+}
+.pixel-scroll-hint .arrow {
+  width: 12px;
+  height: 8px;
+  background: #5B8731;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  animation: scrollBob 1.6s ease-in-out infinite;
+}
+.pixel-scroll-hint .arrow:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.pixel-scroll-hint .arrow:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* === Pixel Status Indicator === */
+.pixel-status-dot {
+  width: 12px;
+  height: 12px;
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,0.3),
+    inset -1px -1px 0 rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,0,0,0.3);
+  image-rendering: pixelated;
+}
+.pixel-status-dot.online {
+  background: #80B348;
+}
+.pixel-status-dot.offline {
+  background: #B3312C;
+}
+.pixel-status-dot.maintenance {
+  background: #F9B300;
+}
+
+/* === Nav Item Pixel Hover === */
+.nav-pixel-item {
+  position: relative;
+  padding: 6px 10px;
+  transition: all 0.1s ease;
+  border: 2px solid transparent;
+}
+.nav-pixel-item:hover {
+  border: 2px solid #5B8731;
+  box-shadow:
+    inset 2px 2px 0 rgba(91,135,49,0.15),
+    inset -2px -2px 0 rgba(0,0,0,0.2);
+  background: rgba(91,135,49,0.08);
+}
+.nav-pixel-item:active {
+  box-shadow:
+    inset -2px -2px 0 rgba(255,255,255,0.05),
+    inset 2px 2px 0 rgba(0,0,0,0.3);
+  transform: translateY(1px);
+}
+
+/* === Pixel Icon Wrapper (inline alignment) === */
+.pixel-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+/* === Pixel Icon (8x8 at 2px/pixel, via box-shadow) === */
+.icon-pixel {
+  display: inline-block;
+  width: 2px;
+  height: 2px;
+  position: relative;
+  vertical-align: middle;
+  image-rendering: pixelated;
+}
+.icon-announce { box-shadow: 4px 0px 0 #FFD700,6px 0px 0 #FFD700,8px 0px 0 #FFD700,10px 0px 0 #FFD700,2px 2px 0 #FFD700,4px 2px 0 #FFD700,6px 2px 0 #FFD700,8px 2px 0 #FFD700,10px 2px 0 #FFD700,12px 2px 0 #FFD700,0px 4px 0 #FFD700,6px 4px 0 #FFD700,12px 4px 0 #FFD700,0px 6px 0 #FFD700,6px 6px 0 #FFD700,12px 6px 0 #FFD700,2px 8px 0 #FFD700,4px 8px 0 #FFD700,6px 8px 0 #FFD700,8px 8px 0 #FFD700,12px 8px 0 #FFD700,4px 10px 0 #FFD700,8px 10px 0 #FFD700,2px 12px 0 #FFD700,10px 12px 0 #FFD700,6px 14px 0 #FFD700,8px 14px 0 #FFD700; }
+.icon-event { box-shadow: 6px 0px 0 #F9B300,8px 0px 0 #F9B300,4px 2px 0 #F9B300,10px 2px 0 #F9B300,2px 4px 0 #F9B300,12px 4px 0 #F9B300,2px 6px 0 #F9B300,6px 6px 0 #F9B300,8px 6px 0 #F9B300,12px 6px 0 #F9B300,0px 8px 0 #F9B300,14px 8px 0 #F9B300,6px 10px 0 #F9B300,10px 10px 0 #F9B300,4px 12px 0 #F9B300,12px 12px 0 #F9B300,2px 14px 0 #F9B300,12px 14px 0 #F9B300; }
+.icon-ban { box-shadow: 2px 0px 0 #B3312C,4px 0px 0 #B3312C,6px 0px 0 #B3312C,8px 0px 0 #B3312C,10px 0px 0 #B3312C,12px 0px 0 #B3312C,0px 2px 0 #B3312C,14px 2px 0 #B3312C,0px 4px 0 #B3312C,8px 4px 0 #B3312C,14px 4px 0 #B3312C,0px 6px 0 #B3312C,6px 6px 0 #B3312C,8px 6px 0 #B3312C,14px 6px 0 #B3312C,0px 8px 0 #B3312C,4px 8px 0 #B3312C,14px 8px 0 #B3312C,0px 10px 0 #B3312C,6px 10px 0 #B3312C,14px 10px 0 #B3312C,0px 12px 0 #B3312C,14px 12px 0 #B3312C,2px 14px 0 #B3312C,4px 14px 0 #B3312C,6px 14px 0 #B3312C,8px 14px 0 #B3312C,10px 14px 0 #B3312C,12px 14px 0 #B3312C; }
+.icon-clipboard { box-shadow: 0px 2px 0 #4A4A4A,2px 2px 0 #4A4A4A,4px 2px 0 #E8D5A3,6px 2px 0 #E8D5A3,8px 2px 0 #E8D5A3,10px 2px 0 #E8D5A3,12px 2px 0 #E8D5A3,14px 2px 0 #E8D5A3,0px 4px 0 #4A4A4A,12px 4px 0 #E8D5A3,0px 6px 0 #4A4A4A,12px 6px 0 #E8D5A3,0px 8px 0 #4A4A4A,4px 8px 0 #E8D5A3,6px 8px 0 #4A4A4A,8px 8px 0 #4A4A4A,10px 8px 0 #E8D5A3,0px 10px 0 #4A4A4A,4px 10px 0 #E8D5A3,10px 10px 0 #E8D5A3,2px 12px 0 #E8D5A3,4px 12px 0 #E8D5A3,10px 12px 0 #E8D5A3,8px 14px 0 #E8D5A3,10px 14px 0 #E8D5A3; }
+.icon-phone { box-shadow: 4px 0px 0 #80B348,6px 0px 0 #80B348,8px 0px 0 #80B348,10px 0px 0 #80B348,4px 2px 0 #80B348,10px 2px 0 #80B348,2px 4px 0 #80B348,4px 4px 0 #80B348,10px 4px 0 #80B348,12px 4px 0 #80B348,2px 6px 0 #80B348,12px 6px 0 #80B348,2px 8px 0 #80B348,6px 8px 0 #80B348,8px 8px 0 #80B348,12px 8px 0 #80B348,2px 10px 0 #80B348,12px 10px 0 #80B348,2px 12px 0 #80B348,4px 12px 0 #80B348,6px 12px 0 #80B348,8px 12px 0 #80B348,10px 12px 0 #80B348,12px 12px 0 #80B348,6px 14px 0 #80B348,8px 14px 0 #80B348; }
+.icon-wrench { box-shadow: 0px 0px 0 #7C7C7C,0px 2px 0 #7C7C7C,2px 2px 0 #7C7C7C,2px 4px 0 #7C7C7C,4px 4px 0 #7C7C7C,4px 6px 0 #7C7C7C,6px 6px 0 #7C7C7C,8px 6px 0 #7C7C7C,6px 8px 0 #7C7C7C,10px 8px 0 #7C7C7C,6px 10px 0 #7C7C7C,12px 10px 0 #7C7C7C,6px 12px 0 #7C7C7C,8px 12px 0 #7C7C7C,10px 12px 0 #7C7C7C,8px 14px 0 #7C7C7C; }
+
+/* === Pixel Diamond Icon (pure CSS) === */
+.pixel-diamond {
+  width: 16px;
+  height: 16px;
+  background: #5BFAFA;
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,0.4),
+    inset -1px -1px 0 rgba(0,0,0,0.3);
+  border: 1px solid #3BA0A0;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  image-rendering: pixelated;
+  display: inline-block;
+}

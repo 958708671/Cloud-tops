@@ -1,0 +1,30 @@
+# 测试和文档文件
+测试清单.md
+Minecraft服务器白名单管理系统完整文档.md
+
+# 本地 UI 测试图片
+public/images/工作台UI.png
+public/images/熔炉UI.png
+public/images/酿造台UI.png
+public/images/运输矿车UI.png
+public/images/漏斗UI.png
+public/images/高炉UI.png
+public/images/烟熏炉UI.png
+public/images/切石机UI.png
+public/images/织布机UI.png
+public/images/锻造台UI.png
+public/images/村民UI.png
+
+# 脚本文件
+scripts/
+
+# 本地测试文件
+*.local
+
+# 数据库迁移脚本（含敏感种子数据/密码，不提交）
+database/admin_schema.sql
+
+# 构建产物
+.next/
+node_modules/
+tsconfig.tsbuildinfo
