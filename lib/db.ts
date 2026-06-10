@@ -1,6 +1,27 @@
-import { neon } from '@neondatabase/serverless';
+import { neon, type NeonQueryFunction } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL || '');
+let _sql: NeonQueryFunction | null = null;
+
+function getSql(): NeonQueryFunction {
+  if (!_sql) {
+    _sql = neon(process.env.DATABASE_URL || '');
+  }
+  return _sql;
+}
+
+// Proxy 包装，让外部 sql`...` 和 sql.query(...) 用法不变
+const sql = new Proxy({} as NeonQueryFunction, {
+  apply(_target, _thisArg, args) {
+    return Reflect.apply(getSql(), undefined, args);
+  },
+  get(_target, prop, _receiver) {
+    const value = Reflect.get(getSql(), prop, getSql());
+    if (typeof value === 'function') {
+      return value.bind(getSql());
+    }
+    return value;
+  },
+});
 
 // 兼容 pg 风格的 query(text, params) 接口，内部用 neon 实现
 export const pgPool = {

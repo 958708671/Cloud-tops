@@ -237,7 +237,7 @@ export default function QuizAttemptsPage() {
                 onClick={handleAction}
                 className={`${
                   actionType === 'reset'
-                    ? 'bg-mc-gold hover:bg-mc-gold
+                    ? 'bg-mc-gold hover:bg-mc-gold'
                     : 'bg-red-600 hover:bg-red-700'
                 } text-white px-6 py-2 rounded-sm`}
               >
